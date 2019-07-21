@@ -1,8 +1,10 @@
 //1. Написать функцию loop, которая будет принимать параметры: times (значение по умолчанию = 0), callback (значение по умолчанию = null) и будет в цикле (times раз), вызывать функцию callback. Если функция не передана, то цикл не должен отрабатывать ни разу. Покажите применение этой функции
 
 function loop(times = 0, callback = null) {
-    for (i = 0; i < times; i++) {
-        return callback;
+    if (typeof callback === 'function') { // чтобы callback вызывался только в том случае, если он будет представлять из себя функцию
+        for (i = 0; i < times; i++) {
+            callback(); // функцию надо вызывать, а вы ее возвращаете:)
+        }
     }
 }
 
@@ -40,6 +42,8 @@ class Human {
         this.dateOfBirth = "";
 
     };
+    // к this.name вы прибавляете $, а затем просто создаете объект, к которому далее прибавлете this.age...
+    // код не будет работать
     displayInfo() {
         return this.name + $ {} + this.age + $ {} + this.dateOfBirth;
     }
