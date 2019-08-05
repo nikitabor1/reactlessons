@@ -1,31 +1,34 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {Login} from './Login';
-import {Menu} from './Menu';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Router, Route, IndexRoute, browserHistory } from "react-router";
+import "bootstrap/dist/css/bootstrap.min.css";
 
+import Layout from "./app/layouts/Layout";
+import Main from "./app/pages/Main";
+import Users from "./app/pages/Users";
+import User from "./app/pages/User";
+import Posts from "./app/pages/Posts";
+import Post from "./app/pages/Post";
+import Comments from "./app/pages/Comments";
+import Comment from "./app/pages/Comment";
 
+import PageNotFound from "./app/pages/PageNotFound";
 
-class App extends React.Component {
-    render() {
-        const menuItems = [
-            {title:"Главная", href: "/"},
-            {title:"О нас", href: "/aboutus"},
-            {title:"Услуги", href: "/services"},
-            {title:"Контакты", href: "/contacts"}
-        ];
-        const loginText = "Enter your login";
-        const pathwordText = "Enter your pathword";
-        const EntbtnText = "Enter";
-        
-        return ( 
-            <div>
-                <h1>Первое приложение на React</h1> 
-                <p>Hello React</p> 
-                <Menu items = {menuItems} titleMenu = "Основное меню сайта"/>
-                <Login name = {loginText} pathw = {pathwordText} enterButText ={EntbtnText}/>
-            </div>
-        )
-    }
-};
-
-ReactDOM.render( < App / > , document.querySelector('#root'));
+ReactDOM.render(
+  <Router history={browserHistory}>
+    <Route path="/" component={Layout}>
+      <IndexRoute component={Main} />
+      <Route path="users" component={Users}>
+        <Route path=":userId" component={User} />
+      </Route>
+      <Route path="posts" component={Posts}>
+        <Route path=":id" component={Post} />
+      </Route>
+      <Route path="comments" component={Comments}>
+        <Route path=":id" component={Comment} />
+      </Route>
+      <Route path="*" component={PageNotFound} />
+    </Route>
+  </Router>,
+  document.querySelector("#root")
+);

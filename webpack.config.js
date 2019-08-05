@@ -10,10 +10,18 @@ module.exports = {
     module:{
         rules:[
             {
-                test: /\.js$/,
+                test: /\.jsx?$/,
                 exclude: /node_modules/,
-                loader:"babel-loader"
+                use:"babel-loader"
+            },
+            {
+                test: /\.css/,
+                use:["style-loader", "css-loader" ]
             }
         ]
+    },
+    devServer: {
+        historyApiFallback: true,
+        contentBase: path.resolve(__dirname, 'dist' )
     }
 }
