@@ -1,31 +1,38 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Login} from './Login';
-import {Menu} from './Menu';
+import Blog from './app/components/Blog';
+import WelcomeModal from './app/components/WelcomeModal';
+import {Modal,Button, Icon, Header} from 'semantic-ui-react';
 
 
 
 class App extends React.Component {
     render() {
-        const menuItems = [
-            {title:"Главная", href: "/"},
-            {title:"О нас", href: "/aboutus"},
-            {title:"Услуги", href: "/services"},
-            {title:"Контакты", href: "/contacts"}
+        const postsArr = [
+            {
+                post_id:1,
+                title:"Lorem ipsum dolor sit",
+                postbody:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint nam consectetur amet consequuntur odit assumenda modi ad perspiciatis quas porro cupiditate ut eos, incidunt laudantium, magnam obcaecati. Eveniet, molestias harum."
+            },
+            {
+                post_id:2,
+                title:"Lorem ipsum dolor sit",
+                postbody:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint nam consectetur amet consequuntur odit assumenda modi ad perspiciatis quas porro cupiditate ut eos, incidunt laudantium, magnam obcaecati. Eveniet, molestias harum."
+            },
+            {
+                post_id:3,
+                title:"Lorem ipsum dolor sit",
+                postbody:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint nam consectetur amet consequuntur odit assumenda modi ad perspiciatis quas porro cupiditate ut eos, incidunt laudantium, magnam obcaecati. Eveniet, molestias harum."
+            }
         ];
-        const loginText = "Enter your login";
-        const pathwordText = "Enter your pathword";
-        const EntbtnText = "Enter";
-        
-        return ( 
+        return( 
             <div>
-                <h1>Первое приложение на React</h1> 
-                <p>Hello React</p> 
-                <Menu items = {menuItems} titleMenu = "Основное меню сайта"/>
-                <Login name = {loginText} pathw = {pathwordText} enterButText ={EntbtnText}/>
+                <Blog allPosts={postsArr}/>
+                <WelcomeModal />
             </div>
         )
     }
 };
 
-ReactDOM.render( < App / > , document.querySelector('#root'));
+ReactDOM.render( < App /> , document.querySelector('#root'));
+
