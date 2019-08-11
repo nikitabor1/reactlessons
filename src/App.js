@@ -1,38 +1,43 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Blog from './app/components/Blog';
-import WelcomeModal from './app/components/WelcomeModal';
-import {Modal,Button, Icon, Header} from 'semantic-ui-react';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Router, Route, IndexRoute, browserHistory } from "react-router";
+import { Provider } from "react-redux";
+
+import store from "./store";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import Layout from "./layouts/Layout";
+import Main from "./pages/Main";
+// import User from "./pages/User";
+// import Post from "./pages/Post";
+// import Comment from "./pages/Comment";
+// import Users from "./pages/Users";
+// import Posts from "./pages/Posts";
+// import Comments from "./pages/Comments";
+import UsersList from "./components/UsersList";
+import PostList from "./components/PostList";
+import CommentList from "./components/CommentList";
 
 
+import PageNotFound from "./pages/PageNotFound";
 
-class App extends React.Component {
-    render() {
-        const postsArr = [
-            {
-                post_id:1,
-                title:"Lorem ipsum dolor sit",
-                postbody:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint nam consectetur amet consequuntur odit assumenda modi ad perspiciatis quas porro cupiditate ut eos, incidunt laudantium, magnam obcaecati. Eveniet, molestias harum."
-            },
-            {
-                post_id:2,
-                title:"Lorem ipsum dolor sit",
-                postbody:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint nam consectetur amet consequuntur odit assumenda modi ad perspiciatis quas porro cupiditate ut eos, incidunt laudantium, magnam obcaecati. Eveniet, molestias harum."
-            },
-            {
-                post_id:3,
-                title:"Lorem ipsum dolor sit",
-                postbody:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint nam consectetur amet consequuntur odit assumenda modi ad perspiciatis quas porro cupiditate ut eos, incidunt laudantium, magnam obcaecati. Eveniet, molestias harum."
-            }
-        ];
-        return( 
-            <div>
-                <Blog allPosts={postsArr}/>
-                <WelcomeModal />
-            </div>
-        )
-    }
-};
-
-ReactDOM.render( < App /> , document.querySelector('#root'));
-
+ReactDOM.render(
+  <Provider store={store}>
+    <Router history={browserHistory}>
+      <Route path="/" component={Layout}>
+        <IndexRoute component={Main} />
+        <Route path="users" component={UsersList}>
+          <Route path=":userId" component={UsersList} />
+        </Route>
+        <Route path="posts" component={PostList}>
+          <Route path=":postId" component={PostList} />
+        </Route>
+        <Route path="comments" component={CommentList}>
+          <Route path=":commentId" component={CommentList} />
+        </Route>
+        <Route path="*" component={PageNotFound} />
+      </Route>
+    </Router>
+  </Provider>,
+  document.querySelector("#root")
+);
