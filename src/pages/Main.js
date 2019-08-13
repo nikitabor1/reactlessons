@@ -1,12 +1,12 @@
 import React from "react";
 
-export default class Main extends React.Component {
-  render() {
+const Main = (props) => {
     return (
       <div>
         <h1>Главная страница</h1>
         <p>Добро пожаловать на наш сайт</p>
       </div>
     );
-  }
 }
+
+export default Main

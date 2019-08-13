@@ -1,23 +1,18 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 import CommentContent from "./CommentContent";
 import { mapStateToProps } from "../layouts/Layout";
 import { connect } from "react-redux";
 import { fetchComments } from "../actions/commentsActions";
 
-class CommentList extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     comments: []
-  //   };
-  // }
-  render() {
-    if (!this.props.params.commentId) {
-      if (!this.props.comments.length) {
+const CommentList = (props) => {
+  
+  useEffect(()=>props.dispatch(fetchComments()),[])
+
+    if (!props.params.commentId) {
+      if (!props.comments.length) {
         return <>Нет ни одного комментария</>;
       }
-      const comments = this.props.comments.map(comment => {
+      const comments = props.comments.map(comment => {
         return <CommentContent key={comment.id} {...comment} />;
       });
       return (
@@ -27,8 +22,8 @@ class CommentList extends Component {
         </div>
       );
     } else {
-      const comment = this.props.comments.find(comment => {
-        return comment.id == this.props.params.commentId;
+      const comment = props.comments.find(comment => {
+        return comment.id == props.params.commentId;
       });
       return (
         <div>
@@ -36,20 +31,47 @@ class CommentList extends Component {
           <CommentContent {...comment} />
         </div>
       );
-    }
-
-
-
-
 
   }
-  componentDidMount() {
-    this.props.dispatch(fetchComments());
-    // axios
-    //   .get("http://jsonplaceholder.typicode.com/comments/")
-    //   .then(response => {
-    //     this.setState({ comments: response.data });
-    //   });
+ 
+
   }
-}
 export default connect(mapStateToProps)(CommentList);
+
+
+
+
+// class CommentList extends Component {
+
+//   render() {
+//     if (!this.props.params.commentId) {
+//       if (!this.props.comments.length) {
+//         return <>Нет ни одного комментария</>;
+//       }
+//       const comments = this.props.comments.map(comment => {
+//         return <CommentContent key={comment.id} {...comment} />;
+//       });
+//       return (
+//         <div>
+//           <h1>Комментарии</h1>
+//           {comments}
+//         </div>
+//       );
+//     } else {
+//       const comment = this.props.comments.find(comment => {
+//         return comment.id == this.props.params.commentId;
+//       });
+//       return (
+//         <div>
+//           <h1>Комментарии</h1>
+//           <CommentContent {...comment} />
+//         </div>
+//       );
+//     }
+
+//   }
+//   componentDidMount() {
+//     this.props.dispatch(fetchComments());
+//   }
+// }
+// export default connect(mapStateToProps)(CommentList);

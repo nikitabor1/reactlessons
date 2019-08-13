@@ -1,21 +1,24 @@
 import React, { Component } from "react";
 import { Link } from "react-router";
 
-export default class UserProfile extends Component {
-  render() {
+const UserProfile = (props) => {
+
     return (
       <div className="card border-secondary mb-3">
         <div className="card-header">
-          <Link to={`/users/${this.props.id}`}>{this.props.username}</Link>
+          <Link to={`/users/${props.id}`}>{props.username}</Link>
         </div>
 
         <div className="card-body text-secondary">
-          <p>{this.props.name}</p>
-          <p>{this.props.email}</p>
-          <p>{this.props.phone}</p>
-          <p>{this.props.website}</p>
+          <p>{props.name}</p>
+          <p>{props.email}</p>
+          <p>{props.phone}</p>
+          <p>{props.website}</p>
         </div>
       </div>
     );
-  }
+  
 }
+
+
+export default UserProfile
