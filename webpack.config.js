@@ -10,7 +10,7 @@ module.exports = {
     module:{
         rules:[
             {
-                test: /\.js$/,
+                test: /\.jsx?$/,
                 exclude: /node_modules/,
                 use:"babel-loader"
             },
@@ -19,5 +19,9 @@ module.exports = {
                 use:["style-loader", "css-loader" ]
             }
         ]
+    },
+    devServer: {
+        historyApiFallback: true,
+        contentBase: path.resolve(__dirname, 'dist' )
     }
 }
