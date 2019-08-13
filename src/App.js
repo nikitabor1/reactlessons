@@ -5,20 +5,11 @@ import { Provider } from "react-redux";
 
 import store from "./store";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import Layout from "./layouts/Layout";
 import Main from "./pages/Main";
-// import User from "./pages/User";
-// import Post from "./pages/Post";
-// import Comment from "./pages/Comment";
-// import Users from "./pages/Users";
-// import Posts from "./pages/Posts";
-// import Comments from "./pages/Comments";
 import UsersList from "./components/UsersList";
 import PostList from "./components/PostList";
 import CommentList from "./components/CommentList";
-
-
 import PageNotFound from "./pages/PageNotFound";
 
 ReactDOM.render(
